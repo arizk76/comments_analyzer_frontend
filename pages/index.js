@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import NavBar from '../components/NavBar';
 
 export default function Home() {
   return (
@@ -7,10 +9,11 @@ export default function Home() {
         <title>Comments Analyzer</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <NavBar />
 
       <main className='flex flex-col items-center justify-center w-full flex-1 px-20 text-center'></main>
 
-      <footer className='flex items-center justify-center w-full h-24 border-t'>
+      <footer className='flex items-center justify-center w-full h-12 border-t'>
         <a
           className='flex items-center justify-center'
           href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
