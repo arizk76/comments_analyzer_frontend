@@ -105,11 +105,11 @@ export default function Twitter() {
         </form>
       </div>
       {/* <h1>{`${!data ? 'Loading....' : 'block'}`}</h1> */}
-      <h1 className={`${!data.Tweet ? 'hidden' : 'block'}`}>
+      <h1>
         <strong className='text-lg'>Tweet : </strong>
         {data.Tweet}
       </h1>
-      <h1 className={`${!data.Hashtag ? 'hidden' : 'block'}`}>
+      <h1>
         <strong className='text-lg'>Hashtag : </strong>
         {data.Hashtag}
       </h1>
