@@ -11,6 +11,7 @@ export default function Twitter() {
   });
   const [userInputURL, setUserInputURL] = useState('');
   const [userSelectOptions, setUserSelectOptions] = useState('');
+  const [catchError, setCatchError] = useState();
   const chartData = {
     labels: ['Negative', 'Positive', 'Neutral'],
     datasets: [
@@ -36,23 +37,45 @@ export default function Twitter() {
   };
 
   const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    // console.log(userInputURL);
-    const response = await fetch(
-      `/api/twitter?url=${userInputURL}&source=${userSelectOptions}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    try {
+      evt.preventDefault();
+      // console.log(userInputURL);
+      const response = await fetch(
+        `/api/twitter?url=${userInputURL}&source=${userSelectOptions}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await response.json();
+      if (!data) {
+        return (
+          <section className='flex-1'>
+            <div className=' h-12 mb-24'>
+              <h1>Loading .......</h1>
+            </div>
+          </section>
+        );
       }
-    );
-    const data = await response.json();
 
-    // console.log(data);
+      // console.log(data);
 
-    setData(data);
+      setData(data);
+    } catch (error) {
+      setCatchError(error);
+    }
   };
+  if (catchError) {
+    return (
+      <section className='flex-1'>
+        <div className=' h-12 mb-24'>
+          <h1>Caught an error. Please try again later</h1>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className='flex-1'>

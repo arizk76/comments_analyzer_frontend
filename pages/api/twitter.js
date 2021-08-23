@@ -42,13 +42,16 @@ async function handler(req, res) {
   let response, responseJson;
 
   try {
-    response = await fetch(process.env.TWITTER_API_URL, options);
-    // console.log(response);
-    if (!response.ok) {
-      const message = `An error has occurred while fetch request, No response: ${response.status}`;
-      throw new Error(message);
+    for (let i = 0; i < 2; i++) {
+      response = await fetch(process.env.TWITTER_API_URL, options);
+      // console.log(response);
+
+      if (!response.ok) {
+        const message = `An error has occurred while fetch request, No response: ${response.status}`;
+        throw new Error(message);
+      }
+      responseJson = await response.json();
     }
-    responseJson = await response.json();
   } catch (err) {
     console.log(err);
   }
