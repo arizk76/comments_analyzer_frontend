@@ -15,7 +15,7 @@ const NavBar = () => {
 
       <div className=' hidden sm:flex  flex-row content-between'>
         <Link href='/'>
-          <a className='border-transparent hover:border-b-2 hover:border-gray-400'>
+          <a className='hidden border-transparent hover:border-b-2 hover:border-gray-400'>
             Home
           </a>
         </Link>

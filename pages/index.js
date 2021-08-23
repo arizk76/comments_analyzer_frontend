@@ -1,17 +1,31 @@
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
+import Reddit from '../components/Reddit';
+import Twitter from '../components/Twitter';
 
 export default function Home() {
   return (
     <section className='flex-1 mt-24 px-6 sm:px-12 md:px-24 lg:px-48'>
-      <h2 className=' font-bold mb-2'>Home Page (Index)</h2>
+      <h1 className=' font-bold mb-2 md:text-2xl '>
+        <strong className='text-gray-7  00'>Comments Analyzer </strong>
+        <span className='text-gray-500'>- Find out what they really think</span>
+      </h1>
       <p className=' py-3 text-left'>
-        This example adds a property to your page, allowing you to return a
-        React component for the layout. This allows you to define the layout on
-        a per-page basis. Since we're returning a function, we can have complex
-        nested layouts if desired.
+        Hero section Need to add some text in this area
       </p>
+      <Reddit />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Twitter />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </section>
   );
 }

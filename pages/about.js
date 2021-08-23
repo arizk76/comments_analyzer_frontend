@@ -92,19 +92,21 @@ const about = () => {
             headache to achieve. Now after that I have a written function just
             to get all the comments and then feed them into another function
             that does a number of things:
-            <ul className='list-disc list-inside p-3 m-2 bg-gray-100 rounded-lg'>
-              <li className='list-item mb-3'>
-                <strong>First</strong> retrieves the pickled classifier and the
-                pickled vectorizer. For both Reddit and Twitter, I used a TF-IDF
-                Vectorizer and a C-Support Vector Classification with a linear
-                kernel.
-              </li>
-              <li className='list-item'>
-                <strong>Then</strong> loop through the list going over each
-                comment and predict the sentiment of each individual comment,
-                then add them all up to their respective weights.
-              </li>
-            </ul>
+          </p>
+          <ul className='list-disc list-inside p-3 m-2 bg-gray-100 rounded-lg'>
+            <li className='list-item mb-3'>
+              <strong>First</strong> retrieves the pickled classifier and the
+              pickled vectorizer. For both Reddit and Twitter, I used a TF-IDF
+              Vectorizer and a C-Support Vector Classification with a linear
+              kernel.
+            </li>
+            <li className='list-item'>
+              <strong>Then</strong> loop through the list going over each
+              comment and predict the sentiment of each individual comment, then
+              add them all up to their respective weights.
+            </li>
+          </ul>
+          <p>
             After that, I use the Natural Language Toolkit ( known more commonly
             as <strong>NLTK</strong> ) to find the FreqDist of the comments.
             Then after l get all these results I save them to a Python dict().
@@ -131,15 +133,16 @@ const about = () => {
           <p className='py-3 text-left'>
             Now with twitter there are two options on how I can extract the
             information needed supplied by you:
-            <ul className='list-disc list-inside p-3 m-2 bg-gray-100 rounded-lg'>
-              <li className='list-item mb-3'>
-                <strong>Either </strong>I scrape a tweets with a specified
-                hashtag
-              </li>
-              <li className='list-item mb-3'>
-                <strong>Or </strong>the replies to a tweet.{' '}
-              </li>
-            </ul>
+          </p>
+          <ul className='list-disc list-inside p-3 m-2 bg-gray-100 rounded-lg'>
+            <li className='list-item mb-3'>
+              <strong>Either </strong>I scrape a tweets with a specified hashtag
+            </li>
+            <li className='list-item mb-3'>
+              <strong>Or </strong>the replies to a tweet.{' '}
+            </li>
+          </ul>
+          <p>
             Now this website does use the{' '}
             <span className='italic'>free tier </span>of the Twitter API so
             there will be a limit on the number of tweets/replies retrieved. In
