@@ -1,57 +1,60 @@
-import React from 'react';
 import Link from 'next/link';
 
 const NavBar = () => {
   return (
-    <header className='w-full flex flex-col fixed sm:relative bg-white top-0 left-0 right-0'>
-      <nav
-        id='site-menu'
-        className='flex flex-col sm:flex-row w-full justify-between items-center px-4 md:px-24 sm:px-6 py-1 bg-white shadow sm:shadow-none '
-      >
-        <div className='w-full sm:w-auto self-start sm:self-center flex flex-row sm:flex-none flex-no-wrap justify-between items-center'>
-          <Link href='/'>
-            <a className='no-underline py-1'>
-              <h1 className='font-bold text-lg tracking-widest'>
-                CommentAnalyzer
-              </h1>
-            </a>
-          </Link>
-          <button
-            id='menuBtn'
-            className='block sm:hidden focus:outline-none py-2 '
-            type='button'
-          >
-            MobileMenu
-          </button>
-        </div>
+    <nav className='flex flex-row w-full px-6 sm:px-12 md:px-24 lg:px-48 py-4 bg-[#fcfcfc] content-between shadow-sm'>
+      <div className='flex-1'>
+        <Link href='/'>
+          <a className=' text-md sm:text-lg font-bold sm:tracking-wider lg:text-xl'>
+            CommentAnalyzer
+          </a>
+        </Link>
+      </div>
 
-        <div
-          id='menu'
-          className='w-full sm:w-auto self-end sm:self-center sm:flex flex-col sm:flex-row items-center h-full py-1 pb-4 sm:py-0 sm:pb-0 hidden'
-        >
-          <Link href='/'>
-            <a className='text-dark font-bold hover:text-red text-lg w-full no-underline sm:w-auto sm:pl-8 py-2 sm:py-1 sm:pt-2'>
-              Home
-            </a>
-          </Link>
-          <Link href='/about'>
-            <a className='text-dark font-bold hover:text-red text-lg w-full no-underline sm:w-auto sm:pl-8 py-2 sm:py-1 sm:pt-2'>
-              About
-            </a>
-          </Link>
-          <Link href='/contact'>
-            <a className='text-dark font-bold hover:text-red text-lg w-full no-underline sm:w-auto sm:pl-8 py-2 sm:py-1 sm:pt-2'>
-              Contact
-            </a>
-          </Link>
-          <Link href='/changeLog'>
-            <a className='text-dark font-bold hover:text-red text-lg w-full no-underline sm:w-auto sm:pl-8 py-2 sm:py-1 sm:pt-2'>
-              ChangeLog
-            </a>
-          </Link>
-        </div>
-      </nav>
-    </header>
+      {/* Navigation links show on medium and large screens */}
+
+      <div className=' hidden sm:flex  flex-row content-between'>
+        <Link href='/'>
+          <a className='border-transparent hover:border-b-2 hover:border-gray-400'>
+            Home
+          </a>
+        </Link>
+        <Link href='/about'>
+          <a className='border-transparent hover:border-b-2 hover:border-gray-400 md:ml-10 ml-5'>
+            About
+          </a>
+        </Link>
+        <Link href='/contact'>
+          <a className='border-transparent hover:border-b-2 hover:border-gray-400 md:ml-10 ml-5'>
+            Contact
+          </a>
+        </Link>
+        <Link href='/changeLog'>
+          <a className='border-transparent hover:border-b-2 hover:border-gray-400 md:ml-10 ml-5'>
+            ChangeLog
+          </a>
+        </Link>
+      </div>
+
+      {/* Humbugger mobile menu button only on small screen  */}
+
+      <div className='sm:hidden flex items-center '>
+        <button>
+          <svg
+            className=' w-8 h-8 text-gray-700 hover:text-gray-500 '
+            x-show='!showMenu'
+            fill='none'
+            strokeLinecap='square'
+            strokeLinejoin='square'
+            strokeWidth='1.5'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path d='M4 6h16M4 12h16M4 18h16'></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
   );
 };
 

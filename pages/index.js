@@ -1,29 +1,27 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import Footer from '../components/Footer';
+import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
 
 export default function Home() {
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen py-2'>
-      <Head>
-        <title>Comments Analyzer</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <NavBar />
-
-      <main className='flex flex-col items-center justify-center w-full flex-1 px-20 text-center'></main>
-
-      <footer className='flex items-center justify-center w-full h-12 border-t'>
-        <a
-          className='flex items-center justify-center'
-          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Powered by{' '}
-          <img src='/vercel.svg' alt='Vercel Logo' className='h-4 ml-2' />
-        </a>
-      </footer>
-    </div>
+    <section className='flex-1 mt-24 px-6 sm:px-12 md:px-24 lg:px-48'>
+      <h2 className=' font-bold mb-2'>Home Page (Index)</h2>
+      <p className=' py-3 text-left'>
+        This example adds a property to your page, allowing you to return a
+        React component for the layout. This allows you to define the layout on
+        a per-page basis. Since we're returning a function, we can have complex
+        nested layouts if desired.
+      </p>
+    </section>
   );
 }
+
+Home.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      <NavBar />
+      {page}
+      <Footer />
+    </Layout>
+  );
+};

@@ -8,5 +8,8 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [
+    // ...add forms support
+    require('@tailwindcss/forms'),
+  ],
+};
