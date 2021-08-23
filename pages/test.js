@@ -94,15 +94,15 @@ export default function test() {
         <strong>Post Title : </strong>
         {data['Post title']}
       </h1>
-      <h1>
+      <h1 className='text-red-600'>
         <strong>Negative : </strong>
         {data.neg_percentage} %
       </h1>
-      <h1>
+      <h1 className='text-green-600'>
         <strong>Positive : </strong>
         {data.positive_percentage} %
       </h1>
-      <h1>
+      <h1 className='text-yellow-600'>
         <strong>Neutral : </strong>
         {data.neutral_percentage} %
       </h1>
