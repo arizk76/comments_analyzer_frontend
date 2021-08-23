@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Pie } from 'react-chartjs-2';
-import { defaults } from 'react-chartjs-2';
 
 export default function Twitter() {
-  defaults.animation = false;
   const [data, setData] = useState({
     ['Post title']: '',
     neg_percentage: 0,
@@ -15,13 +13,6 @@ export default function Twitter() {
   const [userSelectOptions, setUserSelectOptions] = useState('');
   const chartData = {
     labels: ['Negative', 'Positive', 'Neutral'],
-    options: [
-      {
-        animation: {
-          duration: 0,
-        },
-      },
-    ],
     datasets: [
       {
         data: [
@@ -79,20 +70,23 @@ export default function Twitter() {
             </div>
             <input
               type='text'
-              name='Tweet'
+              name='URL'
               onChange={(evt) => setUserInputURL(evt.target.value)}
               value={userInputURL}
-              id='tweet'
-              className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md overflow-clip'
+              id='url'
+              className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md overflow-clip'
               // placeholder='www.reddit.com'
             />
             <div className='absolute inset-y-0 right-0 flex items-center'>
+              <label htmlFor='url' className='sr-only'>
+                Url
+              </label>
               <select
                 id='model'
                 name='model'
                 value={userSelectOptions}
                 onChange={(evt) => setUserSelectOptions(evt.target.value)}
-                className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-700 sm:text-sm rounded-md'
+                className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md'
               >
                 <option value='Hashtag'>Hashtag</option>
                 <option value='Singular_tweet'>Singular Tweet</option>
@@ -110,7 +104,7 @@ export default function Twitter() {
           </div>
         </form>
       </div>
-      <h1>{`${!data ? 'Loading....' : ''}`}</h1>
+      {/* <h1>{`${!data ? 'Loading....' : 'block'}`}</h1> */}
       <h1 className={`${!data.Tweet ? 'hidden' : 'block'}`}>
         <strong className='text-lg'>Tweet : </strong>
         {data.Tweet}

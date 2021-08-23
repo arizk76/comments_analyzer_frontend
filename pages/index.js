@@ -3,8 +3,10 @@ import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
 import Reddit from '../components/Reddit';
 import Twitter from '../components/Twitter';
+import { defaults } from 'react-chartjs-2';
 
 export default function Home() {
+  defaults.animation = false;
   return (
     <section className='flex-1 mt-24 px-6 sm:px-12 md:px-24 lg:px-48'>
       <h1 className=' font-bold mb-2 md:text-2xl '>
