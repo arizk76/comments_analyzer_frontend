@@ -45,7 +45,6 @@ async function handler(req, res) {
     // console.log(response);
     if (!response.ok) {
       const message = `An error has occurred while fetch request, No response: ${response.status}`;
-      res.end();
       throw new Error(message);
     }
     responseJson = await response.json();
