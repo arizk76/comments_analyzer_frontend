@@ -37,7 +37,7 @@ export default function Reddit() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     // console.log(userInputURL);
-    const response = await fetch(`/api/redditcors?url=${userInputURL}`, {
+    const response = await fetch(`/api/reddit?url=${userInputURL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
