@@ -7,11 +7,11 @@ export default function Layout({ children }) {
       <Head>
         <title>Comment Analyzer Application</title>
         <meta charSet='utf-8' />
-        <meta httpEquiv='X-UA-Compatible' content='IE=edge'/>
         <meta
           name='viewport'
-          content='width=device-width, initial-scale=1.0'
-        ></meta>
+          content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover'
+        />
+        <meta name='mobile-web-app-capable' content='yes' />
       </Head>
 
       <main className='flex flex-col min-h-screen content-between '>
