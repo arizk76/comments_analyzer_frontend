@@ -11,7 +11,7 @@ export default function Reddit() {
   });
   const [userInputURL, setUserInputURL] = useState('');
   const chartData = {
-    labels: ['Negative', 'Positive', 'Neutral'],
+    labels: ['Neg', 'Pos', 'Neu'],
     datasets: [
       {
         data: [
@@ -120,8 +120,8 @@ export default function Reddit() {
         <strong>Score : </strong>
         {data.score}
       </h1>
-      <div className='mt-12 flex flex-row justify-around'>
-        <div className='xl:w-1/3 xl:h-1/3 md:w-2/3 md:h-2/3 sm:w-3/4 sm:h-3/4 w-auto h-auto'>
+      <div className='mt-8 flex flex-row justify-around'>
+        <div className='w-auto px-5'>
           <Pie
             data={chartData}
             options={{

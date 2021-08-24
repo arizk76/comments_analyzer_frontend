@@ -42,18 +42,26 @@ async function handler(req, res) {
   let response, responseJson;
 
   try {
-    for (let i = 0; i < 2; i++) {
-      response = await fetch(process.env.TWITTER_API_URL, options);
-      // console.log(response);
+    // for (let i = 0; i < 2; i++) {
+    response = await fetch(process.env.TWITTER_API_URL, options);
+    // console.log(response);
 
-      if (!response.ok) {
-        const message = `An error has occurred while fetch request, No response: ${response.status}`;
-        throw new Error(message);
-      }
+    if (!response.ok) {
+      const message = `An error has occurred while fetch request, No response: status ${response.status}`;
+      // console.log(new Error(message));
+      return res.status(response.status).json({
+        ServerError: message,
+      });
+    } else {
       responseJson = await response.json();
     }
+
+    // }
   } catch (err) {
     console.log(err);
+    return res.status(response.status).json({
+      ...err,
+    });
   }
   // console.log(responseJson);
   return res.status(200).json({

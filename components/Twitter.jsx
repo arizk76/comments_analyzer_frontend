@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 
 export default function Twitter() {
   const [data, setData] = useState({
-    ['Post title']: '',
-    neg_percentage: 0,
-    positive_percentage: 0,
-    neutral_percentage: 0,
-    score: 0,
+    // ['Post title']: '',
+    // neg_percentage: 0,
+    // positive_percentage: 0,
+    // neutral_percentage: 0,
+    // score: 0,
   });
   const [userInputURL, setUserInputURL] = useState('');
-  const [userSelectOptions, setUserSelectOptions] = useState('');
-  const [catchError, setCatchError] = useState();
+  const [userSelectOptions, setUserSelectOptions] = useState('Hashtag');
+  const [catchError, setCatchError] = useState({ errorMessage: '' });
   const chartData = {
-    labels: ['Negative', 'Positive', 'Neutral'],
+    labels: ['Neg', 'Pos', 'Neu'],
     datasets: [
       {
         data: [
@@ -37,6 +37,7 @@ export default function Twitter() {
   };
 
   const handleSubmit = async (evt) => {
+    setCatchError({ errorMessage: '' });
     try {
       evt.preventDefault();
       // console.log(userInputURL);
@@ -49,6 +50,11 @@ export default function Twitter() {
           },
         }
       );
+      if (response.status === 500) {
+        setCatchError({
+          errorMessage: `An error has occurred while fetch request, No response: status ${response.status}`,
+        });
+      }
       const data = await response.json();
       if (!data) {
         return (
@@ -63,19 +69,13 @@ export default function Twitter() {
       // console.log(data);
 
       setData(data);
-    } catch (error) {
-      setCatchError(error);
+    } catch (err) {
+      // setCatchError(error);
+      console.log(err);
     }
   };
-  if (catchError) {
-    return (
-      <section className='flex-1'>
-        <div className=' h-12 mb-24'>
-          <h1>Caught an error. Please try again later</h1>
-        </div>
-      </section>
-    );
-  }
+
+  useEffect(() => {}, [data, catchError]); // pass `data` and `error`as a dependency
 
   return (
     <section className='flex-1'>
@@ -109,7 +109,7 @@ export default function Twitter() {
                 name='model'
                 value={userSelectOptions}
                 onChange={(evt) => setUserSelectOptions(evt.target.value)}
-                className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md'
+                className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-1 pl-2 pr-8 border-gray-300 bg-white text-gray-700 sm:text-sm rounded-md'
               >
                 <option value='Hashtag'>Hashtag</option>
                 <option value='Singular_tweet'>Singular Tweet</option>
@@ -127,7 +127,7 @@ export default function Twitter() {
           </div>
         </form>
       </div>
-      {/* <h1>{`${!data ? 'Loading....' : 'block'}`}</h1> */}
+      {/* <h1>{`${!data ? 'Loading....' : ''}`}</h1> */}
       <h1>
         <strong className='text-lg'>Tweet : </strong>
         {data.Tweet}
@@ -148,8 +148,15 @@ export default function Twitter() {
         <strong>Neutral : </strong>
         {data.neutral_percentage} %
       </h1>
-      <div className='mt-12 flex flex-row justify-around'>
-        <div className='xl:w-1/3 xl:h-1/3 md:w-2/3 md:h-2/3 sm:w-3/4 sm:h-3/4 w-auto h-auto'>
+
+      {catchError && (
+        <p className=' text-red-600 font-light text-2xl rounded p-2 hover:text-red-800'>
+          {catchError.errorMessage}
+        </p>
+      )}
+
+      <div className='mt-8 flex flex-row justify-around'>
+        <div className='w-auto px-5'>
           <Pie
             data={chartData}
             options={{
