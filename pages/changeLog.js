@@ -2,7 +2,7 @@ import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
 
-const changeLog = () => {
+const changelog = () => {
   return (
     <section className='flex-1 mt-24 px-6 sm:px-12 md:px-24 lg:px-48'>
       <div className='divide-y-2 divide-gray-100 leading-relaxed sh'>
@@ -49,9 +49,9 @@ const changeLog = () => {
   );
 };
 
-export default changeLog;
+export default changelog;
 
-changeLog.getLayout = function getLayout(page) {
+changelog.getLayout = function getLayout(page) {
   return (
     <Layout>
       <NavBar />

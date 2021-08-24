@@ -85,7 +85,7 @@ export default function Twitter() {
             htmlFor='url'
             className='block text-xl font-medium text-gray-700'
           >
-            Tweet URL
+            Tweet | Hashtag
           </label>
           <div className='mt-1 relative rounded-md shadow-sm'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>

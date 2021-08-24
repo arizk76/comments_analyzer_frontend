@@ -6,12 +6,10 @@ const about = () => {
   return (
     <section className='flex-1 mt-24 px-6 sm:px-12 md:px-24 lg:px-48 md:text-lg'>
       <div className='divide-y-2 divide-gray-100 leading-relaxed sh'>
-        <div className=' mb-16'>
-          <h2 className=' font-bold mb-2 md:text-2xl '>
-            <strong className='text-gray-7  00'>Comments Analyzer </strong>
-            <span className='text-gray-500'>
-              - Find out what they really think
-            </span>
+        <div className=' mb-10'>
+          <h1 className='font-bold mb-2 md:text-2xl text-gray-800'>About</h1>
+          <h2 className='text-gray-500 text-lg font-bold'>
+            Comments Analyzer - Find out what they really think
           </h2>
           <p className='py-3 text-left'>
             Basically what we do is find the top-level comments of{' '}

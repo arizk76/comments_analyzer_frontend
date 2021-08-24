@@ -29,7 +29,7 @@ const NavBar = () => {
             Contact
           </a>
         </Link>
-        <Link href='/changeLog'>
+        <Link href='/changelog'>
           <a className='border-transparent hover:border-b-2 hover:border-gray-400 md:ml-10 ml-5'>
             ChangeLog
           </a>
