@@ -9,34 +9,34 @@ const NavBar = () => {
   if (showMenu) {
     menu = (
       <div
-        className='origin-top-right absolute right-0 top-0 mt-2 mr-2 w-48 h-48 rounded-md shadow-lg py-3 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
+        className='origin-top-right absolute right-0 top-0 mt-2 mr-2 w-48 h-48 rounded-md shadow-lg py-3 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-in-out duration-300'
         onClick={() => setShowMenu(false)}
       >
         <ul className=' h-40  py-3  flex flex-col justify-around'>
           <li>
             <Link href='/'>
-              <a className='bg-gray-100 px-1 py-0  m-4 text-gray-600 hover:text-gray-900 border-transparent hover:border-b-2 hover:border-gray-400 '>
+              <a className=' px-1 py-0  m-4 text-gray-600 hover:text-gray-900 border-transparent hover:border-b-2 hover:border-gray-400 '>
                 Home
               </a>
             </Link>
           </li>
           <li>
             <Link href='/about'>
-              <a className='bg-gray-100 px-1 py-0  m-4 text-gray-600 border-transparent hover:border-b-2 hover:border-gray-400'>
+              <a className=' px-1 py-0  m-4 text-gray-600 border-transparent hover:border-b-2 hover:border-gray-400'>
                 About
               </a>
             </Link>
           </li>
           <li>
             <Link href='/contact'>
-              <a className='bg-gray-100 px-1 py-0 m-4 text-gray-600 border-transparent hover:border-b-2 hover:border-gray-400'>
+              <a className=' px-1 py-0 m-4 text-gray-600 border-transparent hover:border-b-2 hover:border-gray-400'>
                 Contact
               </a>
             </Link>
           </li>
           <li>
             <Link href='/changelog'>
-              <a className='bg-gray-100 px-1 py-0 m-4 text-gray-600 border-transparent hover:border-b-2 hover:border-gray-400'>
+              <a className=' px-1 py-0 m-4 text-gray-600 border-transparent hover:border-b-2 hover:border-gray-400'>
                 ChangeLog
               </a>
             </Link>

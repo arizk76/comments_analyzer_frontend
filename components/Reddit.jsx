@@ -33,7 +33,7 @@ export default function Reddit() {
       if (response.status >= 500) {
         console.log(response);
         setCatchError({
-          errorMessage: `Backend: ${response.statusText}: status ${response.status}`,
+          errorMessage: `Server error: ${response.statusText} code(${response.status})`,
         });
         setLoading(false);
       }
