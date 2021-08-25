@@ -18,6 +18,12 @@ export default function Reddit() {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    if (!userInputURL) {
+      setCatchError({
+        errorMessage: 'Input empty : please enter a valid reddit link.',
+      });
+      return;
+    }
     fetchData();
   };
 

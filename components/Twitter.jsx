@@ -32,6 +32,14 @@ export default function Twitter() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
+    if (!userInputURL) {
+      setCatchError({
+        errorMessage:
+          'Input empty : please enter a valid tweet link or hashtag.',
+      });
+      return;
+    }
+
     fetchData();
   };
 
@@ -152,7 +160,6 @@ export default function Twitter() {
         <strong>Neutral : </strong>
         {data.neutral_percentage} %
       </h1>
-
       {catchError && (
         <p className=' text-red-700 font-light text-xl rounded p-2 hover:text-red-500'>
           {catchError.errorMessage}
