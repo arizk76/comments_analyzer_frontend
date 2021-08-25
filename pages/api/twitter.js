@@ -39,31 +39,43 @@ async function handler(req, res) {
     },
     body: JSON.stringify(post),
   };
-  let response, responseJson;
+  let response, responseJson, statusCode, errorMessage;
 
-  try {
-    // for (let i = 0; i < 2; i++) {
-    response = await fetch(process.env.TWITTER_API_URL, options);
-    // console.log(response);
+  response = await fetch(process.env.TWITTER_API_URL, options);
+  statusCode = response.status;
+  // console.log(response);
 
-    if (!response.ok) {
-      const message = `An error has occurred while fetch request, No response: status ${response.status}`;
-      // console.log(new Error(message));
-      return res.status(response.status).json({
-        ServerError: message,
+  // Handle errors from backend server
+  if (!response.ok) {
+    // Internal Server Error
+    if (statusCode === 500) {
+      errorMessage = `(500) Internal Server Error :server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.`;
+      console.log(new Error(errorMessage));
+      return res.status(500).json({
+        ServerError: errorMessage,
       });
-    } else {
-      responseJson = await response.json();
+      // Service Unavailable Error
+    } else if (statusCode === 503) {
+      errorMessage = `(503) Service Unavailable :server is currently unable to handle the request due to a temporary overload or scheduled maintenance.`;
+      console.log(new Error(errorMessage));
+      return res.status(503).json({
+        ServerError: errorMessage,
+      });
+      // Rest of Server Errors
+    } else if (statusCode > 500) {
+      errorMessage = `${statusCode} Server Error :server is currently not working`;
+      console.log(errorMessage);
+      return res.status(response.status).json({
+        ServerError: errorMessage,
+      });
     }
-
-    // }
-  } catch (err) {
-    console.log(err);
-    return res.status(response.status).json({
-      ...err,
-    });
+    // No Error
+  } else {
+    responseJson = await response.json();
   }
+
   // console.log(responseJson);
+  console.log('response status code: ', statusCode);
   return res.status(200).json({
     ...responseJson,
   });

@@ -1,43 +1,26 @@
-import { useState, useEffect } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { useState } from 'react';
+// import { Pie } from 'react-chartjs-2';
+import dynamic from 'next/dynamic';
+
+const PieChart = dynamic(() => import('./PieChart'), { ssr: false });
 
 export default function Twitter() {
   const [data, setData] = useState({
-    // ['Post title']: '',
-    // neg_percentage: 0,
-    // positive_percentage: 0,
-    // neutral_percentage: 0,
-    // score: 0,
+    ['Post title']: '',
+    neg_percentage: 0,
+    positive_percentage: 0,
+    neutral_percentage: 0,
+    score: 0,
   });
   const [userInputURL, setUserInputURL] = useState('');
   const [userSelectOptions, setUserSelectOptions] = useState('Hashtag');
   const [catchError, setCatchError] = useState({ errorMessage: '' });
-  const chartData = {
-    labels: ['Neg', 'Pos', 'Neu'],
-    datasets: [
-      {
-        data: [
-          data.neg_percentage,
-          data.positive_percentage,
-          data.neutral_percentage,
-        ],
-        backgroundColor: [
-          'rgba(220, 38, 38, 0.2)',
-          'rgba(5, 150, 105, 0.2)',
-          'rgba(217, 119, 6, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 38, 38, 1)',
-          'rgba(5, 162, 105, 1)',
-          'rgba(225, 133, 8, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (evt) => {
+    setData({});
     setCatchError({ errorMessage: '' });
+    setLoading(true);
     try {
       evt.preventDefault();
       // console.log(userInputURL);
@@ -50,32 +33,25 @@ export default function Twitter() {
           },
         }
       );
-      if (response.status === 500) {
+
+      if (response.status >= 500) {
+        console.log(response);
         setCatchError({
-          errorMessage: `An error has occurred while fetch request, No response: status ${response.status}`,
+          errorMessage: `Server error: ${response.statusText}: status ${response.status}`,
         });
       }
+
       const data = await response.json();
-      if (!data) {
-        return (
-          <section className='flex-1'>
-            <div className=' h-12 mb-24'>
-              <h1>Loading .......</h1>
-            </div>
-          </section>
-        );
-      }
 
       // console.log(data);
 
       setData(data);
+      setLoading(false);
     } catch (err) {
       // setCatchError(error);
       console.log(err);
     }
   };
-
-  useEffect(() => {}, [data, catchError]); // pass `data` and `error`as a dependency
 
   return (
     <section className='flex-1'>
@@ -124,10 +100,15 @@ export default function Twitter() {
             >
               Submit
             </button>
+            {loading && (
+              <button className='w-full h-32 py-5 bg-gray-600 bg-opacity-50 text-lg font-semibold text-white rounded-lg my-0 animate-bounce'>
+                Loading results
+              </button>
+            )}
           </div>
         </form>
       </div>
-      {/* <h1>{`${!data ? 'Loading....' : ''}`}</h1> */}
+
       <h1>
         <strong className='text-lg'>Tweet : </strong>
         {data.Tweet}
@@ -150,21 +131,13 @@ export default function Twitter() {
       </h1>
 
       {catchError && (
-        <p className=' text-red-600 font-light text-2xl rounded p-2 hover:text-red-800'>
+        <p className=' text-red-700 font-light text-xl rounded p-2 hover:text-red-500'>
           {catchError.errorMessage}
         </p>
       )}
-
       <div className='mt-8 flex flex-row justify-around'>
         <div className='w-auto px-5'>
-          <Pie
-            data={chartData}
-            options={{
-              maintainAspectRatio: true,
-              responsive: true,
-              // resizeDelay: 300,
-            }}
-          />
+          <PieChart data={data} />
         </div>
       </div>
     </section>
