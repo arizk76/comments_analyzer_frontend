@@ -33,8 +33,9 @@ export default function Reddit() {
       if (response.status >= 500) {
         console.log(response);
         setCatchError({
-          errorMessage: `Server error: ${response.statusText}: status ${response.status}`,
+          errorMessage: `Backend: ${response.statusText}: status ${response.status}`,
         });
+        setLoading(false);
       }
 
       const data = await response.json();
