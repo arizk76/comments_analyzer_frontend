@@ -50,7 +50,7 @@ const NavBar = () => {
     <nav className='flex flex-row w-full px-6 sm:px-12 md:px-24 lg:px-48 py-4 bg-[#fcfcfc] content-between items-center h-20 shadow-sm'>
       <div className='flex-1'>
         <div className=' text-md sm:text-lg font-bold sm:tracking-wider lg:text-xl'>
-          CommentAnalyzer
+          CommentsAnalyzer
         </div>
       </div>
 

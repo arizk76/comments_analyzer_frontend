@@ -47,24 +47,31 @@ async function handler(req, res) {
 
   // Handle errors from backend server
   if (!response.ok) {
-    // Internal Server Error
+    // Internal Server Error 1
     if (statusCode === 500) {
       errorMessage = `(500) Internal Server Error :server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.`;
-      console.log(new Error(errorMessage));
+      // console.log(new Error(errorMessage));
       return res.status(500).json({
         ServerError: errorMessage,
       });
-      // Service Unavailable Error
+      // Service Unavailable Error 2
     } else if (statusCode === 503) {
       errorMessage = `(503) Service Unavailable :server is currently unable to handle the request due to a temporary overload or scheduled maintenance.`;
-      console.log(new Error(errorMessage));
+      // console.log(new Error(errorMessage));
       return res.status(503).json({
+        ServerError: errorMessage,
+      });
+      // Gateway Timeout Error 3
+    } else if (statusCode === 504) {
+      errorMessage = `(504) Gateway Timeout :server error response code indicates that the server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.`;
+      // console.log(new Error(errorMessage));
+      return res.status(504).json({
         ServerError: errorMessage,
       });
       // Rest of Server Errors
     } else if (statusCode > 500) {
       errorMessage = `${statusCode} Server Error :server is currently not working`;
-      console.log(errorMessage);
+      // console.log(errorMessage);
       return res.status(response.status).json({
         ServerError: errorMessage,
       });
@@ -75,7 +82,7 @@ async function handler(req, res) {
   }
 
   // console.log(responseJson);
-  console.log('response status code: ', statusCode);
+  // console.log('response status code: ', statusCode);
   return res.status(200).json({
     ...responseJson,
   });

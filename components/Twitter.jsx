@@ -1,5 +1,4 @@
-import { useState } from 'react';
-// import { Pie } from 'react-chartjs-2';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 const PieChart = dynamic(() => import('./PieChart'), { ssr: false });
@@ -17,12 +16,31 @@ export default function Twitter() {
   const [catchError, setCatchError] = useState({ errorMessage: '' });
   const [loading, setLoading] = useState(false);
 
+  const handleChange = (evt) => {
+    setUserInputURL(updatedURL(evt.target.value));
+  };
+  const updatedURL = (url) => {
+    if (!url.includes('?s=20')) {
+      let newURL = url;
+      return newURL;
+    } else if (url.includes('?s=20')) {
+      let newURL = url.substring(0, url.length - 5);
+      return newURL;
+    }
+  };
+
   const handleSubmit = async (evt) => {
+    evt.preventDefault();
+
+    fetchData();
+  };
+
+  const fetchData = async () => {
     setData({});
     setCatchError({ errorMessage: '' });
     setLoading(true);
+
     try {
-      evt.preventDefault();
       // console.log(userInputURL);
       const response = await fetch(
         `/api/twitter?url=${userInputURL}&source=${userSelectOptions}`,
@@ -35,7 +53,7 @@ export default function Twitter() {
       );
 
       if (response.status >= 500) {
-        console.log(response);
+        // console.log(response);
         setCatchError({
           errorMessage: `Server error: ${response.statusText} code(${response.status})`,
         });
@@ -49,10 +67,12 @@ export default function Twitter() {
       setData(data);
       setLoading(false);
     } catch (err) {
-      // setCatchError(error);
-      console.log(err);
+      setCatchError(err);
+      console.log('Catch Error: ', err);
     }
   };
+  // useEffect to Handle fetchData function
+  useEffect(() => {}, [fetchData]);
 
   return (
     <section className='flex-1'>
@@ -65,17 +85,14 @@ export default function Twitter() {
             Tweet | Hashtag
           </label>
           <div className='mt-1 relative rounded-md shadow-sm'>
-            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-              {/* <span className='text-gray-500 sm:text-md'>URL</span> */}
-            </div>
+            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'></div>
             <input
               type='text'
               name='URL'
-              onChange={(evt) => setUserInputURL(evt.target.value)}
+              onChange={handleChange}
               value={userInputURL}
               id='url'
               className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md overflow-clip'
-              // placeholder='www.reddit.com'
             />
             <div className='absolute inset-y-0 right-0 flex items-center'>
               <label htmlFor='url' className='sr-only'>
@@ -97,7 +114,6 @@ export default function Twitter() {
             <button
               type='submit'
               className='w-full h-10 py-1 bg-gray-600 text-lg font-semibold text-white rounded-lg my-5'
-              // onClick={handleSubmit}
             >
               Submit
             </button>
@@ -110,14 +126,19 @@ export default function Twitter() {
         </form>
       </div>
 
-      <h1>
-        <strong className='text-lg'>Tweet : </strong>
-        {data.Tweet}
-      </h1>
-      <h1>
-        <strong className='text-lg'>Hashtag : </strong>
-        {data.Hashtag}
-      </h1>
+      {data.Tweet && (
+        <h1>
+          <strong className='text-lg'>Tweet : </strong>
+          <span className=' text-base'>{data.Tweet}</span>
+        </h1>
+      )}
+      {data.Hashtag && (
+        <h1>
+          <strong className='text-lg'>Hashtag : </strong>
+          <span className=' text-xl'>{data.Hashtag}</span>
+        </h1>
+      )}
+
       <h1 className='text-red-600'>
         <strong>Negative : </strong>
         {data.neg_percentage} %

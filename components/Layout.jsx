@@ -5,7 +5,6 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>Comment Analyzer Application</title>
         <meta
           name='description'
           content='Comments Analyzer - Find out what they really think'

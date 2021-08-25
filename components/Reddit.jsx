@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import PieChart from './PieChart';
 import dynamic from 'next/dynamic';
 
@@ -17,11 +17,15 @@ export default function Reddit() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    fetchData();
+  };
+
+  const fetchData = async () => {
     setData({});
     setCatchError({ errorMessage: '' });
     setLoading(true);
     try {
-      evt.preventDefault();
       // console.log(userInputURL);
       const response = await fetch(`/api/reddit?url=${userInputURL}`, {
         method: 'POST',
@@ -49,6 +53,9 @@ export default function Reddit() {
       console.log(err);
     }
   };
+
+  // useEffect to Handle fetchData function
+  useEffect(() => {}, [fetchData]);
 
   return (
     <section className='flex-1'>
