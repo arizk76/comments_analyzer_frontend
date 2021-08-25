@@ -55,7 +55,8 @@ export default function Twitter() {
       if (response.status >= 500) {
         // console.log(response);
         setCatchError({
-          errorMessage: `Server error: ${response.statusText} code(${response.status})`,
+          // errorMessage: `Server error: ${response.statusText} code(${response.status})`,
+          errorMessage: 'Server error : please try again',
         });
         setLoading(false);
       }
