@@ -45,6 +45,9 @@ async function handler(req, res) {
   //   .then((responseJson) => json(response));
 
   response = await fetch(process.env.REDDIT_API_URL, options);
+
+  responseJson = await response.json();
+
   statusCode = response.status;
   // // console.log(response);
 
@@ -76,20 +79,20 @@ async function handler(req, res) {
       // rest of errors
     } else if (statusCode > 500) {
       errorMessage = `${statusCode} Server Error :server is currently not working`;
-      console.log(errorMessage);
+      // console.log(errorMessage);
       return res.status(response.status).json({
         ServerError: errorMessage,
       });
     }
-  } else {
-    responseJson = await response.json();
   }
+
   // } catch (err) {
   //   console.log(err);
   //   return res.status(response.status).json({
   //     ...err,
   //   });
   // }
+  // console.log(response);
 
   // console.log(responseJson);
   // console.log('response status code: ', statusCode);
