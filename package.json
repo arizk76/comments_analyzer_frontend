@@ -1,10 +1,18 @@
 {
-  "proxy": "http://commentsanalyzer.herokuapp.com",
-  "private": true,
+  "name": "frontend",
+  "description": "",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "Ahmed Rizk",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arizk76/comments_analyzer_frontend.git"
   },
   "dependencies": {
     "chart.js": "^3.5.1",
